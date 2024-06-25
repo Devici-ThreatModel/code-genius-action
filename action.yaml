@@ -1,4 +1,4 @@
-name: 'Code Genius'
+name: 'Devici Code Genius Action'
 description: 'This GitHub Action runs Code Genius on your code to generate a threat model'
 inputs:
   verbose-level:

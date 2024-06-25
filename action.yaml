@@ -21,7 +21,13 @@ inputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  entrypoint: '/code_genius repo --verbose=${{ inputs.verbose-level }} --print-tree --yes ${{ inputs.path }}'
+  entrypoint: '/code_genius'
+  args:
+    - 'repo'
+    - '--verbose=${{ inputs.verbose-level }}'
+    - '--print-tree'
+    - '--yes'
+    - '${{ inputs.path }}'
   env:
     CG_CLIENT_ID: ${{ inputs.client-id }}
     CG_CLIENT_SECRET: ${{ inputs.client-secret }}

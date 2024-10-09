@@ -1,22 +1,26 @@
 name: 'Devici Code Genius Action'
-description: 'This GitHub Action runs Code Genius on your code to generate a threat model'
+description: 'This GitHub Action runs Devici Code Genius Repository Mode on your code to generate a threat model'
+branding:
+  icon: 'play'
+  color: 'red'
 inputs:
-  verbose-level:
-    description: 'Verbosity level (0-2)'
-    required: false
-    default: "1"
   client-id:
     description: 'Client ID for API access from the platform'
-    required: true
+    required: false
   client-secret:
     description: 'Client Secret for API access from the platform'
-    required: true
+    required: false
   path:
     description: 'Path to the code to analyze'
-    required: true
+    required: false
+    default: "."
+  print-tree:
+    description: 'Print the CLI text representation of the resulting tree without threats'
+    required: false
+    default: "true"
   github-token:
     description: 'GitHub Token'
-    required: true
+    required: false
     default: '${{ github.token }}'
 runs:
   using: 'docker'
@@ -24,10 +28,8 @@ runs:
   entrypoint: '/code_genius'
   args:
     - 'repo'
-    - '--verbose=${{ inputs.verbose-level }}'
-    - '--print-tree'
-    - '--yes'
     - '${{ inputs.path }}'
+    - '--print-tree=${{ inputs.print-tree }}'
   env:
     CG_CLIENT_ID: ${{ inputs.client-id }}
     CG_CLIENT_SECRET: ${{ inputs.client-secret }}
